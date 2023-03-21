@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Location(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
     lat = models.DecimalField(max_digits=8, decimal_places=6, null=True)
     lng = models.DecimalField(max_digits=8, decimal_places=6, null=True)
 
@@ -24,7 +24,7 @@ class User(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200, null=True, blank=True)
     username = models.CharField(max_length=200)
-    password = models.CharField(max_length=200)
+    password = models.CharField(max_length=200, min_length=10)
     role = models.CharField(max_length=200, choices=Roles.choices, default="member")
     age = models.PositiveIntegerField()
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
